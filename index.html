@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurae Botanicals — Clean, Plant-Powered Skincare</title>
+  <meta name="description" content="Nature-rooted skincare rituals crafted with cold-pressed botanicals for radiant, balanced, and deeply hydrated skin." />
+
+  <!-- Google Fonts: Cormorant Garamond (Serif) & Plus Jakarta Sans (Sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Custom Design Tokens & Typography -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FAF8F5',
+            sand: {
+              light: '#F4F1EB',
+              DEFAULT: '#EFECE6',
+              dark: '#E6E0D4',
+            },
+            sage: {
+              light: '#869B85',
+              DEFAULT: '#6B7F6A',
+              dark: '#556854',
+              tint: '#EAEFEA',
+            },
+            charcoal: {
+              DEFAULT: '#222522',
+              muted: '#5A5F5A',
+              subtle: '#7D827D',
+            },
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '1rem',
+            '3xl': '1.5rem',
+          },
+          boxShadow: {
+            'warm': '0 12px 36px -8px rgba(34, 37, 34, 0.06), 0 4px 12px -4px rgba(34, 37, 34, 0.03)',
+            'warm-hover': '0 20px 44px -10px rgba(34, 37, 34, 0.09), 0 6px 16px -4px rgba(34, 37, 34, 0.04)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Minimal Custom Styles for Scroll Reveal & Subtle Organic Details -->
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #222522;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle Intersection Observer Entrance Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delays for grid items */
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 200ms; }
+    .reveal-delay-3 { transition-delay: 300ms; }
+
+    /* Respect reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-cream text-charcoal selection:bg-sage/20 selection:text-charcoal overflow-x-hidden">
+
+  <!-- ==================== 1. STICKY NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 w-full bg-cream/90 backdrop-blur-md border-b border-sand-dark/60 transition-colors">
+    <nav class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-20 flex items-center justify-between" aria-label="Main Navigation">
+      
+      <!-- Brand Logo & Minimalist Leaf Mark -->
+      <a href="#" class="group flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage rounded-lg py-1">
+        <span class="w-9 h-9 rounded-full bg-sage-tint flex items-center justify-center text-sage-dark transition-transform duration-300 group-hover:scale-105">
+          <!-- Minimalist Botanical Leaf SVG -->
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+          </svg>
+        </span>
+        <span class="font-serif text-2xl sm:text-[26px] font-medium tracking-tight text-charcoal">
+          Aurae Botanicals
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <div class="hidden md:flex items-center gap-8 lg:gap-10">
+        <a href="#benefits" class="text-sm font-medium text-charcoal-muted hover:text-charcoal transition-colors">Benefits</a>
+        <a href="#products" class="text-sm font-medium text-charcoal-muted hover:text-charcoal transition-colors">Products</a>
+        <a href="#ingredients" class="text-sm font-medium text-charcoal-muted hover:text-charcoal transition-colors">Ingredients</a>
+        <a href="#reviews" class="text-sm font-medium text-charcoal-muted hover:text-charcoal transition-colors">Reviews</a>
+      </div>
+
+      <!-- Desktop Actions: Bag Indicator & Shop Now CTA -->
+      <div class="hidden md:flex items-center gap-4">
+        <button
+          type="button"
+          id="bag-toggle-desktop"
+          aria-label="View shopping bag"
+          class="relative inline-flex items-center gap-2 px-3.5 py-2.5 rounded-full text-sm font-medium text-charcoal hover:bg-sand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+        >
+          <svg class="w-4 h-4 text-charcoal-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span>Bag</span>
+          <span id="bag-count-desktop" class="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-semibold rounded-full bg-sage text-cream">0</span>
+        </button>
+
+        <a
+          href="#products"
+          class="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-sage hover:bg-sage-dark text-cream text-sm font-medium shadow-sm transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sage"
+        >
+          Shop Now
+        </a>
+      </div>
+
+      <!-- Mobile Actions: Bag Counter + Menu Button -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button
+          type="button"
+          id="bag-toggle-mobile"
+          aria-label="View shopping bag"
+          class="relative inline-flex items-center gap-1.5 p-2.5 rounded-full text-charcoal hover:bg-sand transition-colors"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span id="bag-count-mobile" class="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[11px] font-semibold rounded-full bg-sage text-cream">0</span>
+        </button>
+
+        <button
+          type="button"
+          id="mobile-menu-btn"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Toggle navigation menu"
+          class="p-2.5 rounded-xl text-charcoal hover:bg-sand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+        >
+          <svg id="menu-icon-open" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+          <svg id="menu-icon-close" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-cream border-b border-sand-dark px-5 pt-3 pb-6 space-y-2">
+      <a href="#benefits" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-charcoal hover:bg-sand transition-colors">Benefits</a>
+      <a href="#products" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-charcoal hover:bg-sand transition-colors">Products</a>
+      <a href="#ingredients" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-charcoal hover:bg-sand transition-colors">Ingredients</a>
+      <a href="#reviews" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-charcoal hover:bg-sand transition-colors">Reviews</a>
+      <div class="pt-2">
+        <a href="#products" class="mobile-nav-link block w-full text-center px-6 py-3.5 rounded-full bg-sage hover:bg-sage-dark text-cream text-base font-medium transition-colors">
+          Shop Now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== 2 & 3. HERO & FEATURED PRODUCT CARD ==================== -->
+    <section class="relative pt-12 pb-20 sm:pt-16 sm:pb-24 lg:pt-24 lg:pb-32 overflow-hidden">
+      <!-- Soft Ambient Background Glow -->
+      <div aria-hidden="true" class="pointer-events-none absolute -top-24 right-0 w-[480px] h-[480px] rounded-full bg-sand/70 blur-3xl -z-10"></div>
+      <div aria-hidden="true" class="pointer-events-none absolute bottom-0 -left-24 w-[380px] h-[380px] rounded-full bg-sage-tint/60 blur-3xl -z-10"></div>
+
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center">
+
+          <!-- Left Column: Brand Story, CTAs & Trust Stats -->
+          <div class="lg:col-span-7 space-y-7 reveal">
+            <!-- Eyebrow Label -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sand border border-sand-dark/80 text-xs sm:text-sm font-medium tracking-wide text-sage-dark uppercase">
+              <span>Clean</span>
+              <span class="text-sage" aria-hidden="true">&bull;</span>
+              <span>Botanical</span>
+              <span class="text-sage" aria-hidden="true">&bull;</span>
+              <span>Effective</span>
+            </div>
+
+            <!-- Serif Headline -->
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-[62px] font-medium leading-[1.1] tracking-tight text-charcoal">
+              Nature-Rooted Rituals for Radiant, Balanced Skin
+            </h1>
+
+            <!-- Supporting Paragraph -->
+            <p class="text-base sm:text-lg text-charcoal-muted leading-relaxed max-w-2xl">
+              Thoughtfully formulated with cold-pressed plant extracts and barrier-loving actives. Our minimalist botanical blends replenish lasting moisture and restore your skin’s natural luminosity—without synthetic fillers.
+            </p>
+
+            <!-- Dual CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
+              <a
+                href="#products"
+                class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-sage hover:bg-sage-dark text-cream text-sm sm:text-base font-medium shadow-warm transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sage"
+              >
+                Explore Products
+              </a>
+              <a
+                href="#ingredients"
+                class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-transparent border border-charcoal/25 hover:border-charcoal hover:bg-sand/60 text-charcoal text-sm sm:text-base font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sage"
+              >
+                Our Ingredients
+              </a>
+            </div>
+
+            <!-- Trust Stats Bar -->
+            <div class="pt-6 border-t border-sand-dark grid grid-cols-3 gap-4 sm:gap-8 max-w-xl">
+              <div>
+                <p class="font-serif text-2xl sm:text-3xl font-semibold text-charcoal">98%</p>
+                <p class="text-xs sm:text-sm text-charcoal-muted mt-0.5">felt softer skin</p>
+              </div>
+              <div>
+                <p class="font-serif text-2xl sm:text-3xl font-semibold text-charcoal">4.8/5</p>
+                <p class="text-xs sm:text-sm text-charcoal-muted mt-0.5">customer rating</p>
+              </div>
+              <div>
+                <p class="font-serif text-2xl sm:text-3xl font-semibold text-charcoal">100%</p>
+                <p class="text-xs sm:text-sm text-charcoal-muted mt-0.5">vegan formulas</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: 3. Featured Product Card ("Botanical Glow Serum") -->
+          <div class="lg:col-span-5 reveal reveal-delay-1">
+            <article class="bg-white/85 backdrop-blur-sm border border-sand-dark/80 rounded-3xl p-6 sm:p-8 shadow-warm hover:shadow-warm-hover transition-all duration-500">
+              <!-- Card Top Badge -->
+              <div class="flex items-center justify-between mb-4">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sage-tint text-sage-dark text-xs font-medium">
+                  <span class="w-1.5 h-1.5 rounded-full bg-sage"></span>
+                  Featured Ritual
+                </span>
+                <span class="text-xs font-medium text-charcoal-subtle">30 ml / 1.0 fl. oz.</span>
+              </div>
+
+              <!-- Replaceable Botanical Product Image Placeholder Container -->
+              <!-- Developers/Designers: Swap the inner illustration with an <img> tag when photography is ready -->
+              <div
+                class="relative w-full aspect-[4/3] rounded-2xl bg-gradient-to-b from-sand-light to-sand flex flex-col items-center justify-center p-6 mb-6 overflow-hidden group"
+                role="img"
+                aria-label="Botanical Glow Serum dropper bottle placeholder illustration"
+              >
+                <!-- Subtle Organic Arch Backdrop -->
+                <div class="absolute inset-x-12 top-5 bottom-0 rounded-t-full bg-cream/70 border-t border-x border-sand-dark/50 transition-transform duration-500 group-hover:scale-105"></div>
+
+                <!-- Bespoke Minimalist Dropper Bottle SVG Illustration -->
+                <svg class="relative z-10 w-32 h-36 text-sage-dark drop-shadow-sm transition-transform duration-500 group-hover:-translate-y-1" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Dropper Bulb -->
+                  <path d="M51 16C51 11.0294 55.0294 7 60 7C64.9706 7 69 11.0294 69 16V28H51V16Z" fill="#556854" />
+                  <!-- Dropper Collar -->
+                  <rect x="46" y="28" width="28" height="9" rx="3" fill="#E6E0D4" stroke="#556854" stroke-width="1.5" />
+                  <!-- Frosted Glass Bottle Body -->
+                  <rect x="34" y="37" width="52" height="92" rx="14" fill="#FAF8F5" stroke="#6B7F6A" stroke-width="1.75" />
+                  <!-- Golden-Sage Botanical Serum Liquid Level -->
+                  <path d="M36 64H84V115C84 121.627 78.6274 127 72 127H48C41.3726 127 36 121.627 36 115V64Z" fill="#EFECE6" />
+                  <!-- Minimalist Label -->
+                  <rect x="41" y="54" width="38" height="58" rx="6" fill="#FAF8F5" stroke="#E6E0D4" stroke-width="1.2" />
+                  <!-- Botanical Leaf Motif on Bottle -->
+                  <path d="M60 72C60 72 67 66 67 60C61 60 60 67 60 72Z" fill="#6B7F6A" />
+                  <path d="M60 75C60 75 53 70 53 64C59 64 60 70 60 75Z" fill="#869B85" />
+                  <line x1="60" y1="67" x2="60" y2="83" stroke="#556854" stroke-width="1.2" stroke-linecap="round" />
+                  <!-- Minimalist Label Lines -->
+                  <line x1="49" y1="91" x2="71" y2="91" stroke="#222522" stroke-width="1.4" stroke-linecap="round" />
+                  <line x1="52" y1="97" x2="68" y2="97" stroke="#7D827D" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+
+                <span class="relative z-10 mt-2 text-[11px] tracking-widest uppercase text-charcoal-subtle font-medium">
+                  Aurae Apothecary
+                </span>
+              </div>
+
+              <!-- Product Details -->
+              <div class="space-y-2.5">
+                <div class="flex items-baseline justify-between gap-4">
+                  <h2 class="font-serif text-2xl sm:text-3xl font-medium text-charcoal">
+                    Botanical Glow Serum
+                  </h2>
+                  <div class="flex items-baseline gap-2 shrink-0">
+                    <span class="text-xl font-semibold text-charcoal">$48</span>
+                    <span class="text-sm text-charcoal-subtle line-through" aria-label="Original price $58">$58</span>
+                  </div>
+                </div>
+
+                <p class="text-sm text-charcoal-muted leading-relaxed">
+                  A weightless, silky concentrate infused with cold-pressed rosehip and green tea to visibly brighten dullness and lock in dewy hydration.
+                </p>
+
+                <div class="pt-3">
+                  <button
+                    type="button"
+                    data-add-to-bag
+                    data-product-name="Botanical Glow Serum"
+                    data-product-price="48"
+                    class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-sage hover:bg-sage-dark text-cream text-sm font-medium transition-all duration-300 hover:shadow-md active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sage"
+                  >
+                    <span>Add to Bag</span>
+                    <span aria-hidden="true">&mdash;</span>
+                    <span>$48</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. BENEFITS SECTION ==================== -->
+    <section id="benefits" class="py-20 sm:py-28 bg-sand-light border-y border-sand-dark/60 scroll-mt-20">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <!-- Section Header -->
+        <div class="max-w-2xl mx-auto text-center space-y-3 mb-14 sm:mb-16 reveal">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sage-dark">Our Philosophy</p>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-charcoal">
+            Thoughtful Formulations, Rooted in Calm
+          </h2>
+          <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+            Every bottle is crafted with purposeful botanicals designed to work in harmony with your skin’s natural rhythm.
+          </p>
+        </div>
+
+        <!-- Three Benefit Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          
+          <!-- Card 1: Plant-Powered -->
+          <article class="bg-cream border border-sand-dark/80 rounded-3xl p-8 sm:p-9 shadow-warm hover:shadow-warm-hover transition-all duration-300 hover:-translate-y-1 reveal">
+            <div class="w-12 h-12 rounded-2xl bg-sage-tint text-sage-dark flex items-center justify-center mb-6">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 20h10" />
+                <path d="M10 20c5.5-2.5.8-6.4 3-10" />
+                <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
+                <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl font-medium text-charcoal mb-3">Plant-Powered</h3>
+            <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+              Sourced from nutrient-dense botanicals, cold-pressed seed oils, and antioxidant-rich flower extracts that nourish skin with essential fatty acids and vitamins.
+            </p>
+          </article>
+
+          <!-- Card 2: Gentle by Design -->
+          <article class="bg-cream border border-sand-dark/80 rounded-3xl p-8 sm:p-9 shadow-warm hover:shadow-warm-hover transition-all duration-300 hover:-translate-y-1 reveal reveal-delay-1">
+            <div class="w-12 h-12 rounded-2xl bg-sage-tint text-sage-dark flex items-center justify-center mb-6">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl font-medium text-charcoal mb-3">Gentle by Design</h3>
+            <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+              pH-balanced and free from synthetic fragrances, drying alcohols, and harsh sulfates—crafted to comfort delicate skin and support a resilient moisture barrier.
+            </p>
+          </article>
+
+          <!-- Card 3: Visible Results -->
+          <article class="bg-cream border border-sand-dark/80 rounded-3xl p-8 sm:p-9 shadow-warm hover:shadow-warm-hover transition-all duration-300 hover:-translate-y-1 reveal reveal-delay-2">
+            <div class="w-12 h-12 rounded-2xl bg-sage-tint text-sage-dark flex items-center justify-center mb-6">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2" />
+                <path d="M12 20v2" />
+                <path d="m4.93 4.93 1.41 1.41" />
+                <path d="m17.66 17.66 1.41 1.41" />
+                <path d="M2 12h2" />
+                <path d="M20 12h2" />
+                <path d="m6.34 17.66-1.41 1.41" />
+                <path d="m19.07 4.93-1.41 1.41" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl font-medium text-charcoal mb-3">Visible Results</h3>
+            <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+              Consistent daily rituals leave skin noticeably softer, smoother, and more luminous—delivering a healthy, well-rested glow you can see and feel.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. BESTSELLERS SECTION ==================== -->
+    <section id="products" class="py-20 sm:py-28 scroll-mt-20">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14 sm:mb-16 reveal">
+          <div class="space-y-3 max-w-xl">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sage-dark">Daily Essentials</p>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-charcoal">
+              Community Bestsellers
+            </h2>
+          </div>
+          <p class="text-sm sm:text-base text-charcoal-muted max-w-md">
+            Three foundational steps designed to cleanse, replenish, and seal in lasting botanical hydration.
+          </p>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <!-- Product 1: Botanical Glow Serum -->
+          <article class="group bg-white/80 border border-sand-dark/80 rounded-3xl p-6 shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col reveal">
+            <!-- Replaceable Product Image Placeholder -->
+            <div
+              class="relative w-full aspect-square rounded-2xl bg-sand-light flex flex-col items-center justify-center p-6 mb-6 overflow-hidden"
+              role="img"
+              aria-label="Botanical Glow Serum product placeholder"
+            >
+              <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-cream/90 text-charcoal text-xs font-medium border border-sand-dark/60">
+                Bestseller
+              </span>
+              <!-- Dropper Bottle Vector Placeholder -->
+              <svg class="w-28 h-32 transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M51 16C51 11.0294 55.0294 7 60 7C64.9706 7 69 11.0294 69 16V28H51V16Z" fill="#556854" />
+                <rect x="46" y="28" width="28" height="9" rx="3" fill="#E6E0D4" stroke="#556854" stroke-width="1.5" />
+                <rect x="34" y="37" width="52" height="92" rx="14" fill="#FAF8F5" stroke="#6B7F6A" stroke-width="1.75" />
+                <path d="M36 68H84V115C84 121.627 78.6274 127 72 127H48C41.3726 127 36 121.627 36 115V68Z" fill="#EAEFEA" />
+                <rect x="42" y="56" width="36" height="54" rx="6" fill="#FAF8F5" stroke="#E6E0D4" stroke-width="1.2" />
+                <circle cx="60" cy="74" r="6" fill="#6B7F6A" fill-opacity="0.25" />
+                <path d="M60 77C60 77 65 72 65 67C60 67 60 73 60 77Z" fill="#6B7F6A" />
+                <line x1="50" y1="90" x2="70" y2="90" stroke="#222522" stroke-width="1.3" stroke-linecap="round" />
+                <line x1="53" y1="96" x2="67" y2="96" stroke="#7D827D" stroke-width="1.1" stroke-linecap="round" />
+              </svg>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-between space-y-4">
+              <div>
+                <div class="flex items-baseline justify-between gap-2 mb-2">
+                  <h3 class="font-serif text-2xl font-medium text-charcoal">Botanical Glow Serum</h3>
+                  <span class="text-lg font-semibold text-charcoal">$48</span>
+                </div>
+                <p class="text-sm text-charcoal-muted leading-relaxed">
+                  Brightening phyto-serum with rosehip and green tea for a dewy, glass-skin finish.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                data-add-to-bag
+                data-product-name="Botanical Glow Serum"
+                data-product-price="48"
+                class="w-full py-3 px-5 rounded-full bg-sand hover:bg-sage text-charcoal hover:text-cream text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+              >
+                Add to Bag &mdash; $48
+              </button>
+            </div>
+          </article>
+
+          <!-- Product 2: Petal Cream Cleanser -->
+          <article class="group bg-white/80 border border-sand-dark/80 rounded-3xl p-6 shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col reveal reveal-delay-1">
+            <!-- Replaceable Product Image Placeholder -->
+            <div
+              class="relative w-full aspect-square rounded-2xl bg-sand-light flex flex-col items-center justify-center p-6 mb-6 overflow-hidden"
+              role="img"
+              aria-label="Petal Cream Cleanser product placeholder"
+            >
+              <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-cream/90 text-charcoal text-xs font-medium border border-sand-dark/60">
+                pH-Balanced
+              </span>
+              <!-- Apothecary Pump Bottle Vector Placeholder -->
+              <svg class="w-28 h-32 transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Pump Spout -->
+                <path d="M54 14H74C76.2091 14 78 15.7909 78 18V20H54V14Z" fill="#556854" />
+                <rect x="57" y="20" width="6" height="10" fill="#6B7F6A" />
+                <rect x="48" y="30" width="24" height="9" rx="3" fill="#E6E0D4" stroke="#556854" stroke-width="1.5" />
+                <!-- Tall Rounded Cylinder Bottle -->
+                <rect x="32" y="39" width="56" height="90" rx="16" fill="#FAF8F5" stroke="#6B7F6A" stroke-width="1.75" />
+                <rect x="39" y="54" width="42" height="58" rx="8" fill="#EFECE6" stroke="#E6E0D4" stroke-width="1.2" />
+                <!-- Petal Motif -->
+                <ellipse cx="60" cy="72" rx="4" ry="7" fill="#6B7F6A" />
+                <ellipse cx="55" cy="75" rx="3.5" ry="6" transform="rotate(-30 55 75)" fill="#869B85" />
+                <ellipse cx="65" cy="75" rx="3.5" ry="6" transform="rotate(30 65 75)" fill="#869B85" />
+                <line x1="49" y1="92" x2="71" y2="92" stroke="#222522" stroke-width="1.3" stroke-linecap="round" />
+                <line x1="52" y1="98" x2="68" y2="98" stroke="#7D827D" stroke-width="1.1" stroke-linecap="round" />
+              </svg>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-between space-y-4">
+              <div>
+                <div class="flex items-baseline justify-between gap-2 mb-2">
+                  <h3 class="font-serif text-2xl font-medium text-charcoal">Petal Cream Cleanser</h3>
+                  <span class="text-lg font-semibold text-charcoal">$34</span>
+                </div>
+                <p class="text-sm text-charcoal-muted leading-relaxed">
+                  Velvety milk-to-cream wash with chamomile and oat lipids that melts away impurities without stripping.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                data-add-to-bag
+                data-product-name="Petal Cream Cleanser"
+                data-product-price="34"
+                class="w-full py-3 px-5 rounded-full bg-sand hover:bg-sage text-charcoal hover:text-cream text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+              >
+                Add to Bag &mdash; $34
+              </button>
+            </div>
+          </article>
+
+          <!-- Product 3: Wildflower Moisturizer -->
+          <article class="group bg-white/80 border border-sand-dark/80 rounded-3xl p-6 shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col reveal reveal-delay-2">
+            <!-- Replaceable Product Image Placeholder -->
+            <div
+              class="relative w-full aspect-square rounded-2xl bg-sand-light flex flex-col items-center justify-center p-6 mb-6 overflow-hidden"
+              role="img"
+              aria-label="Wildflower Moisturizer product placeholder"
+            >
+              <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-cream/90 text-charcoal text-xs font-medium border border-sand-dark/60">
+                Barrier Rich
+              </span>
+              <!-- Frosted Cream Jar Vector Placeholder -->
+              <svg class="w-28 h-32 transition-transform duration-500 group-hover:scale-105" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Lid -->
+                <rect x="24" y="46" width="72" height="16" rx="6" fill="#E6E0D4" stroke="#556854" stroke-width="1.6" />
+                <!-- Wide Apothecary Jar -->
+                <rect x="22" y="62" width="76" height="64" rx="18" fill="#FAF8F5" stroke="#6B7F6A" stroke-width="1.75" />
+                <!-- Label -->
+                <rect x="32" y="74" width="56" height="40" rx="8" fill="#EAEFEA" stroke="#E6E0D4" stroke-width="1.2" />
+                <!-- Botanical Stem -->
+                <path d="M60 90C60 90 66 85 66 80C61 80 60 86 60 90Z" fill="#6B7F6A" />
+                <path d="M60 92C60 92 54 87 54 82C59 82 60 88 60 92Z" fill="#869B85" />
+                <line x1="46" y1="101" x2="74" y2="101" stroke="#222522" stroke-width="1.3" stroke-linecap="round" />
+                <line x1="50" y1="106" x2="70" y2="106" stroke="#7D827D" stroke-width="1.1" stroke-linecap="round" />
+              </svg>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-between space-y-4">
+              <div>
+                <div class="flex items-baseline justify-between gap-2 mb-2">
+                  <h3 class="font-serif text-2xl font-medium text-charcoal">Wildflower Moisturizer</h3>
+                  <span class="text-lg font-semibold text-charcoal">$42</span>
+                </div>
+                <p class="text-sm text-charcoal-muted leading-relaxed">
+                  Cloud-soft botanical cream whipped with niacinamide and meadowfoam to cushion dry skin all day.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                data-add-to-bag
+                data-product-name="Wildflower Moisturizer"
+                data-product-price="42"
+                class="w-full py-3 px-5 rounded-full bg-sand hover:bg-sage text-charcoal hover:text-cream text-sm font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+              >
+                Add to Bag &mdash; $42
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 6. INGREDIENTS SECTION ==================== -->
+    <section id="ingredients" class="py-20 sm:py-28 bg-sand-light border-y border-sand-dark/60 scroll-mt-20">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <!-- Section Header -->
+        <div class="max-w-2xl mx-auto text-center space-y-3 mb-14 sm:mb-16 reveal">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sage-dark">Transparent Actives</p>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-charcoal">
+            Hero Botanicals &amp; Skin-Loving Actives
+          </h2>
+          <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+            Every ingredient is chosen for its proven cosmetic benefits, gentle bioavailability, and traceable origin.
+          </p>
+        </div>
+
+        <!-- Three Ingredient Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+
+          <!-- Ingredient 1: Rosehip Extract -->
+          <article class="bg-cream border border-sand-dark/80 rounded-3xl p-8 shadow-warm hover:shadow-warm-hover transition-all duration-300 reveal">
+            <div class="flex items-center justify-between mb-6">
+              <span class="px-3.5 py-1 rounded-full bg-sand text-xs font-medium text-charcoal-muted">
+                Rosa Canina
+              </span>
+              <span class="w-10 h-10 rounded-full bg-sage-tint text-sage-dark flex items-center justify-center">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m7.5 0a4.5 4.5 0 1 1-4.5 4.5m4.5-4.5H15m-3 4.5V15" />
+                  <circle cx="12" cy="12" r="2" />
+                </svg>
+              </span>
+            </div>
+            <h3 class="font-serif text-2xl sm:text-3xl font-medium text-charcoal mb-3">
+              Rosehip Extract
+            </h3>
+            <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+              Naturally rich in omega fatty acids and plant antioxidants, cold-pressed rosehip helps visibly brighten dull tone, replenish suppleness, and leave skin looking refreshed and luminous.
+            </p>
+          </article>
+
+          <!-- Ingredient 2: Green Tea -->
+          <article class="bg-cream border border-sand-dark/80 rounded-3xl p-8 shadow-warm hover:shadow-warm-hover transition-all duration-300 reveal reveal-delay-1">
+            <div class="flex items-center justify-between mb-6">
+              <span class="px-3.5 py-1 rounded-full bg-sand text-xs font-medium text-charcoal-muted">
+                Camellia Sinensis
+              </span>
+              <span class="w-10 h-10 rounded-full bg-sage-tint text-sage-dark flex items-center justify-center">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+                </svg>
+              </span>
+            </div>
+            <h3 class="font-serif text-2xl sm:text-3xl font-medium text-charcoal mb-3">
+              Green Tea
+            </h3>
+            <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+              Packed with soothing polyphenols, organic green tea leaf extract comforts stressed skin, balances surface shine, and defends against everyday environmental dullness.
+            </p>
+          </article>
+
+          <!-- Ingredient 3: Niacinamide -->
+          <article class="bg-cream border border-sand-dark/80 rounded-3xl p-8 shadow-warm hover:shadow-warm-hover transition-all duration-300 reveal reveal-delay-2">
+            <div class="flex items-center justify-between mb-6">
+              <span class="px-3.5 py-1 rounded-full bg-sand text-xs font-medium text-charcoal-muted">
+                Vitamin B3 Complex
+              </span>
+              <span class="w-10 h-10 rounded-full bg-sage-tint text-sage-dark flex items-center justify-center">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="12 2 21 7 21 17 12 22 3 17 3 7 12 2" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </span>
+            </div>
+            <h3 class="font-serif text-2xl sm:text-3xl font-medium text-charcoal mb-3">
+              Niacinamide
+            </h3>
+            <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+              A gentle, multi-tasking form of Vitamin B3 that refines the look of uneven texture and pores while reinforcing your skin’s natural moisture barrier for lasting softness.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 7. CUSTOMER REVIEWS SECTION ==================== -->
+    <section id="reviews" class="py-20 sm:py-28 scroll-mt-20">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <!-- Section Header -->
+        <div class="max-w-2xl mx-auto text-center space-y-3 mb-14 sm:mb-16 reveal">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sage-dark">Kind Words</p>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-charcoal">
+            Loved by Our Community
+          </h2>
+          <p class="text-sm sm:text-base text-charcoal-muted">
+            Rated 4.8 out of 5 across verified botanical ritualists.
+          </p>
+        </div>
+
+        <!-- Three Testimonial Cards (No customer photos; clean typographic monograms) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+
+          <!-- Testimonial 1 -->
+          <article class="bg-white/80 border border-sand-dark/80 rounded-3xl p-8 shadow-warm flex flex-col justify-between space-y-6 reveal">
+            <div class="space-y-4">
+              <!-- 5 Botanical Stars -->
+              <div class="flex items-center gap-1 text-sage" aria-label="5 out of 5 stars">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+
+              <blockquote class="font-serif text-xl sm:text-2xl text-charcoal leading-snug">
+                “The Botanical Glow Serum sinks in like silk without any heaviness. Within two weeks my skin looked noticeably more rested and luminous.”
+              </blockquote>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2 border-t border-sand">
+              <div class="w-10 h-10 rounded-full bg-sage-tint text-sage-dark font-serif text-base font-semibold flex items-center justify-center" aria-hidden="true">
+                CM
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-charcoal">Clara M.</p>
+                <p class="text-xs text-charcoal-subtle">Verified Buyer &bull; Botanical Glow Serum</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Testimonial 2 -->
+          <article class="bg-white/80 border border-sand-dark/80 rounded-3xl p-8 shadow-warm flex flex-col justify-between space-y-6 reveal reveal-delay-1">
+            <div class="space-y-4">
+              <div class="flex items-center gap-1 text-sage" aria-label="5 out of 5 stars">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+
+              <blockquote class="font-serif text-xl sm:text-2xl text-charcoal leading-snug">
+                “Finally a cleanser that leaves my skin calm and cushioned instead of tight. Petal Cream Cleanser feels like a mini spa ritual every evening.”
+              </blockquote>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2 border-t border-sand">
+              <div class="w-10 h-10 rounded-full bg-sage-tint text-sage-dark font-serif text-base font-semibold flex items-center justify-center" aria-hidden="true">
+                DL
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-charcoal">Devon L.</p>
+                <p class="text-xs text-charcoal-subtle">Verified Buyer &bull; Petal Cream Cleanser</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Testimonial 3 -->
+          <article class="bg-white/80 border border-sand-dark/80 rounded-3xl p-8 shadow-warm flex flex-col justify-between space-y-6 reveal reveal-delay-2">
+            <div class="space-y-4">
+              <div class="flex items-center gap-1 text-sage" aria-label="5 out of 5 stars">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+
+              <blockquote class="font-serif text-xl sm:text-2xl text-charcoal leading-snug">
+                “I pared my routine down to just these three products. Wildflower Moisturizer keeps my skin supple all day without feeling greasy.”
+              </blockquote>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2 border-t border-sand">
+              <div class="w-10 h-10 rounded-full bg-sage-tint text-sage-dark font-serif text-base font-semibold flex items-center justify-center" aria-hidden="true">
+                SR
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-charcoal">Sienna R.</p>
+                <p class="text-xs text-charcoal-subtle">Verified Buyer &bull; Wildflower Moisturizer</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 8. EMAIL SIGNUP SECTION ==================== -->
+    <section class="py-12 sm:py-20">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <div class="relative rounded-3xl bg-sand border border-sand-dark/80 px-6 py-14 sm:px-12 sm:py-20 text-center overflow-hidden shadow-warm reveal">
+          <!-- Subtle Botanical Watermark Accent -->
+          <div aria-hidden="true" class="pointer-events-none absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-sage/10 blur-2xl"></div>
+          <div aria-hidden="true" class="pointer-events-none absolute -left-12 -top-12 w-64 h-64 rounded-full bg-cream/80 blur-2xl"></div>
+
+          <div class="relative z-10 max-w-xl mx-auto space-y-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sage-dark">Join the Ritual</p>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-charcoal">
+              Enjoy 15% Off Your First Botanical Ritual
+            </h2>
+            <p class="text-sm sm:text-base text-charcoal-muted leading-relaxed">
+              Receive seasonal skincare notes, small-batch harvest releases, and an instant welcome code delivered straight to your inbox.
+            </p>
+
+            <!-- Newsletter Form -->
+            <form id="newsletter-form" class="pt-3 max-w-md mx-auto" novalidate>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <label for="newsletter-email" class="sr-only">Email address</label>
+                <input
+                  id="newsletter-email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="Enter your email address"
+                  class="flex-1 px-5 py-3.5 rounded-full bg-cream border border-sand-dark text-charcoal placeholder:text-charcoal-subtle text-sm focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/30 transition-all"
+                />
+                <button
+                  type="submit"
+                  class="px-7 py-3.5 rounded-full bg-sage hover:bg-sage-dark text-cream text-sm font-medium shadow-sm transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sage shrink-0"
+                >
+                  Subscribe
+                </button>
+              </div>
+              <p id="newsletter-feedback" role="status" aria-live="polite" class="mt-3 text-xs sm:text-sm font-medium text-sage-dark min-h-[20px]"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== 9. MINIMAL FOOTER ==================== -->
+  <footer class="border-t border-sand-dark/70 bg-cream py-12">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2.5">
+        <span class="font-serif text-xl font-medium text-charcoal">Aurae Botanicals</span>
+        <span class="text-charcoal-subtle text-sm">&copy; <span id="current-year">2026</span> Aurae Botanicals. All rights reserved.</span>
+      </div>
+
+      <nav aria-label="Footer Navigation" class="flex items-center gap-6 sm:gap-8 text-sm text-charcoal-muted">
+        <a href="#privacy" data-footer-modal="Privacy Policy" class="hover:text-charcoal transition-colors">Privacy</a>
+        <a href="#terms" data-footer-modal="Terms of Service" class="hover:text-charcoal transition-colors">Terms</a>
+        <a href="#contact" data-footer-modal="Contact Aurae" class="hover:text-charcoal transition-colors">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ==================== SUBTLE INTERACTIVE BAG DRAWER & TOAST ==================== -->
+  <!-- Toast Notification when adding items -->
+  <div
+    id="toast-banner"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-5 right-5 z-50 translate-y-24 opacity-0 pointer-events-none transition-all duration-300 bg-charcoal text-cream px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 text-sm"
+  >
+    <span class="w-2 h-2 rounded-full bg-sage-light"></span>
+    <span id="toast-message">Added to your ritual bag</span>
+  </div>
+
+  <!-- Slide-Over Ritual Bag Drawer -->
+  <div id="bag-drawer-backdrop" class="fixed inset-0 z-50 bg-charcoal/30 backdrop-blur-xs hidden opacity-0 transition-opacity duration-300">
+    <aside
+      id="bag-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bag-drawer-title"
+      class="fixed top-0 right-0 h-full w-full max-w-md bg-cream border-l border-sand-dark shadow-2xl p-6 sm:p-8 flex flex-col justify-between translate-x-full transition-transform duration-300"
+    >
+      <div>
+        <div class="flex items-center justify-between pb-5 border-b border-sand-dark">
+          <h2 id="bag-drawer-title" class="font-serif text-2xl font-medium text-charcoal">Your Ritual Bag</h2>
+          <button
+            type="button"
+            id="bag-close-btn"
+            aria-label="Close shopping bag"
+            class="p-2 rounded-full text-charcoal-muted hover:text-charcoal hover:bg-sand transition-colors"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        <div id="bag-items-list" class="py-6 space-y-4 max-h-[60vh] overflow-y-auto">
+          <p class="text-sm text-charcoal-muted text-center py-12">Your botanical bag is currently empty.</p>
+        </div>
+      </div>
+
+      <div class="pt-5 border-t border-sand-dark space-y-4">
+        <div class="flex items-center justify-between text-base font-medium text-charcoal">
+          <span>Subtotal</span>
+          <span id="bag-subtotal">$0</span>
+        </div>
+        <p class="text-xs text-charcoal-subtle">Complimentary carbon-neutral shipping on orders over $65.</p>
+        <button
+          type="button"
+          id="checkout-btn"
+          class="w-full py-3.5 px-6 rounded-full bg-sage hover:bg-sage-dark text-cream text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          disabled
+        >
+          Proceed to Checkout
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Minimal Info Modal for Footer Links (Privacy / Terms / Contact) -->
+  <div id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title" class="fixed inset-0 z-50 hidden items-center justify-center p-5 bg-charcoal/30 backdrop-blur-xs">
+    <div class="bg-cream border border-sand-dark rounded-3xl max-w-md w-full p-7 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 id="info-modal-title" class="font-serif text-2xl font-medium text-charcoal">Information</h3>
+        <button type="button" id="info-modal-close" aria-label="Close modal" class="p-2 rounded-full text-charcoal-muted hover:bg-sand">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <p id="info-modal-body" class="text-sm text-charcoal-muted leading-relaxed"></p>
+    </div>
+  </div>
+
+  <!-- ==================== INTERACTIVE JAVASCRIPT ==================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Dynamic Footer Year
+      const yearEl = document.getElementById('current-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // 2. Mobile Navigation Toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIconOpen = document.getElementById('menu-icon-open');
+      const menuIconClose = document.getElementById('menu-icon-close');
+
+      function toggleMobileMenu(forceClose = false) {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        const nextState = forceClose ? false : !isOpen;
+        mobileMenu.classList.toggle('hidden', !nextState);
+        menuIconOpen.classList.toggle('hidden', nextState);
+        menuIconClose.classList.toggle('hidden', !nextState);
+        mobileMenuBtn.setAttribute('aria-expanded', String(nextState));
+      }
+
+      mobileMenuBtn.addEventListener('click', () => toggleMobileMenu());
+      document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+        link.addEventListener('click', () => toggleMobileMenu(true));
+      });
+
+      // 3. Subtle Scroll-Reveal Intersection Observer
+      const revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // 4. Shopping Bag State & Interactive Drawer
+      const bag = new Map();
+      const bagCountDesktop = document.getElementById('bag-count-desktop');
+      const bagCountMobile = document.getElementById('bag-count-mobile');
+      const bagItemsList = document.getElementById('bag-items-list');
+      const bagSubtotal = document.getElementById('bag-subtotal');
+      const checkoutBtn = document.getElementById('checkout-btn');
+
+      const bagBackdrop = document.getElementById('bag-drawer-backdrop');
+      const bagDrawer = document.getElementById('bag-drawer');
+      const toastBanner = document.getElementById('toast-banner');
+      const toastMessage = document.getElementById('toast-message');
+      let toastTimeout;
+
+      function showToast(text) {
+        toastMessage.textContent = text;
+        toastBanner.classList.remove('translate-y-24', 'opacity-0');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toastBanner.classList.add('translate-y-24', 'opacity-0');
+        }, 2600);
+      }
+
+      function renderBag() {
+        let totalCount = 0;
+        let subtotal = 0;
+        bag.forEach((item) => {
+          totalCount += item.qty;
+          subtotal += item.price * item.qty;
+        });
+
+        bagCountDesktop.textContent = totalCount;
+        bagCountMobile.textContent = totalCount;
+        bagSubtotal.textContent = `$${subtotal}`;
+        checkoutBtn.disabled = totalCount === 0;
+
+        if (bag.size === 0) {
+          bagItemsList.innerHTML = `<p class="text-sm text-charcoal-muted text-center py-12">Your botanical bag is currently empty.</p>`;
+          return;
+        }
+
+        bagItemsList.innerHTML = '';
+        bag.forEach((item, name) => {
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between gap-4 p-4 rounded-2xl bg-sand-light border border-sand-dark/60';
+          row.innerHTML = `
+            <div>
+              <p class="font-serif text-lg font-medium text-charcoal">${name}</p>
+              <p class="text-xs text-charcoal-muted">$${item.price} each</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" data-dec="${name}" aria-label="Decrease quantity of ${name}" class="w-7 h-7 rounded-full bg-cream border border-sand-dark text-charcoal text-sm hover:bg-sand">-</button>
+              <span class="w-5 text-center text-sm font-medium">${item.qty}</span>
+              <button type="button" data-inc="${name}" aria-label="Increase quantity of ${name}" class="w-7 h-7 rounded-full bg-cream border border-sand-dark text-charcoal text-sm hover:bg-sand">+</button>
+            </div>
+          `;
+          bagItemsList.appendChild(row);
+        });
+      }
+
+      bagItemsList.addEventListener('click', (e) => {
+        const incName = e.target.getAttribute('data-inc');
+        const decName = e.target.getAttribute('data-dec');
+        if (incName && bag.has(incName)) {
+          bag.get(incName).qty += 1;
+          renderBag();
+        } else if (decName && bag.has(decName)) {
+          const item = bag.get(decName);
+          if (item.qty > 1) item.qty -= 1;
+          else bag.delete(decName);
+          renderBag();
+        }
+      });
+
+      document.querySelectorAll('[data-add-to-bag]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const name = btn.getAttribute('data-product-name');
+          const price = Number(btn.getAttribute('data-product-price'));
+          if (bag.has(name)) {
+            bag.get(name).qty += 1;
+          } else {
+            bag.set(name, { price, qty: 1 });
+          }
+          renderBag();
+          showToast(`${name} added to your bag`);
+        });
+      });
+
+      function openBag() {
+        bagBackdrop.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          bagBackdrop.classList.remove('opacity-0');
+          bagDrawer.classList.remove('translate-x-full');
+        });
+      }
+
+      function closeBag() {
+        bagBackdrop.classList.add('opacity-0');
+        bagDrawer.classList.add('translate-x-full');
+        setTimeout(() => bagBackdrop.classList.add('hidden'), 300);
+      }
+
+      document.getElementById('bag-toggle-desktop').addEventListener('click', openBag);
+      document.getElementById('bag-toggle-mobile').addEventListener('click', openBag);
+      document.getElementById('bag-close-btn').addEventListener('click', closeBag);
+      bagBackdrop.addEventListener('click', (e) => {
+        if (e.target === bagBackdrop) closeBag();
+      });
+
+      checkoutBtn.addEventListener('click', () => {
+        closeBag();
+        showToast('Demo checkout — thank you for exploring Aurae Botanicals!');
+      });
+
+      // 5. Newsletter Form Validation & Instant Feedback
+      const newsletterForm = document.getElementById('newsletter-form');
+      const newsletterInput = document.getElementById('newsletter-email');
+      const newsletterFeedback = document.getElementById('newsletter-feedback');
+
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = newsletterInput.value.trim();
+        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (!isValid) {
+          newsletterFeedback.textContent = 'Please enter a valid email address to receive your welcome code.';
+          newsletterInput.focus();
+          return;
+        }
+
+        newsletterFeedback.textContent = 'Welcome to Aurae Botanicals. Use code RITUAL15 for 15% off your first order.';
+        newsletterInput.value = '';
+      });
+
+      // 6. Footer Info Modal (Privacy, Terms, Contact)
+      const infoModal = document.getElementById('info-modal');
+      const infoModalTitle = document.getElementById('info-modal-title');
+      const infoModalBody = document.getElementById('info-modal-body');
+      const modalContentMap = {
+        'Privacy Policy': 'Aurae Botanicals respects your inbox and personal privacy. We never sell or share subscriber information and only send botanical skincare updates you opt into.',
+        'Terms of Service': 'All Aurae Botanicals formulations are crafted for cosmetic external use. Patch test prior to first use and store in a cool, dry space away from direct sunlight.',
+        'Contact Aurae': 'Have a question about building your botanical ritual? Reach our studio concierge anytime at hello@auraebotanicals.com.'
+      };
+
+      document.querySelectorAll('[data-footer-modal]').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const title = link.getAttribute('data-footer-modal');
+          infoModalTitle.textContent = title;
+          infoModalBody.textContent = modalContentMap[title] || '';
+          infoModal.classList.remove('hidden');
+          infoModal.classList.add('flex');
+        });
+      });
+
+      document.getElementById('info-modal-close').addEventListener('click', () => {
+        infoModal.classList.add('hidden');
+        infoModal.classList.remove('flex');
+      });
+
+      infoModal.addEventListener('click', (e) => {
+        if (e.target === infoModal) {
+          infoModal.classList.add('hidden');
+          infoModal.classList.remove('flex');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
